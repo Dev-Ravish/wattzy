@@ -1,35 +1,5 @@
 import Link from "next/link";
-
-const stations = [
-  {
-    id: 1,
-    name: "Station 1",
-    location: "Location 1",
-    distance: 1.2,
-    status: "Available",
-  },
-  {
-    id: 2,
-    name: "Station 2",
-    location: "Location 2",
-    distance: 2.3,
-    status: "Available",
-  },
-  {
-    id: 3,
-    name: "Station 3",
-    location: "Location 3",
-    distance: 3.4,
-    status: "Unavailable",
-  },
-  {
-    id: 4,
-    name: "Station 4",
-    location: "Location 4",
-    distance: 4.5,
-    status: "Available",
-  },
-];
+import {stations} from "@/lib/data";
 
 export default function StationList() {
   return (
@@ -42,7 +12,6 @@ export default function StationList() {
             <h2>{station.name}</h2>
             <p>{station.location}</p>
             <p>{station.distance} km away</p>
-            <p>Status: {station.status}</p>
           </div>
           </Link>
         ))}

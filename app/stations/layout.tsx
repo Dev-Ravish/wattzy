@@ -7,8 +7,8 @@ const Map = dynamic(() => import("@/components/map"), { ssr: false });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-2 gap-4 p-4">
-      <div className="absolute top-0 right-0 p-4">
+    <div className="grid lg:grid-cols-2 gap-4 p-4">
+      <div className="absolute top-0 right-0 p-4 z-50">
         <SignedIn>
           <UserButton>
             <UserButton.MenuItems>
