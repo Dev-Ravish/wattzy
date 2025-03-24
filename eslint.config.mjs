@@ -10,6 +10,20 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+        project: "./tsconfig.json",
+      },
+    },
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

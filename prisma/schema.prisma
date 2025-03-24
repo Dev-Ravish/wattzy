@@ -14,21 +14,49 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
+  id        String    @id @default(cuid())
+  clerkId   String    @unique
+  email     String    @unique
   name      String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  posts     Post[]
+  role      UserRole  @default(USER)
+  bookings  Booking[]
+  stations  Station[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
-model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
+model Station {
+  id          String    @id @default(cuid())
+  name        String
+  address     String
+  isAvailable Boolean   @default(true)
+  owner        User      @relation(fields: [ownerId], references: [id])
+  ownerId      String
+  bookings    Booking[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Booking {
+  id        String      @id @default(cuid())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  station   Station     @relation(fields: [stationId], references: [id])
+  stationId String
+  slot      DateTime
+  charger   ChargerType
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+enum ChargerType {
+  KW20
+  KW120
+  KW150
+}
+
+enum UserRole {
+  ADMIN
+  STATIONOWNER
+  USER
 }

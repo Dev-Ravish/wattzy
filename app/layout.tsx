@@ -1,7 +1,11 @@
+import { ClerkProvider } from "@clerk/nextjs";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import ReactQueryClientProvider from "@/lib/query-client";
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,16 +27,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-
-        </body>
-      </html>
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+            <ReactQueryClientProvider>
+              {children}
+            </ReactQueryClientProvider>
+          </body>
+        </html>
     </ClerkProvider>
   );
 }
