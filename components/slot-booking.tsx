@@ -3,9 +3,10 @@
 import type { Station } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import BookingSlot from "./slots";
 
 async function fetchStationData(stationId: string) {
-  const { data } = await axios.get(`/api/stations/${stationId}`);
+  const { data } = await axios.get(`/api/stations?stationId=${stationId}`);
   return data;
 }
 
@@ -21,7 +22,7 @@ export default function StationCard({ stationId }: { stationId: string }) {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading station data</div>;
-
+  console.log(stationData)
   return (
     <div>
       {stationData && (
@@ -35,6 +36,7 @@ export default function StationCard({ stationId }: { stationId: string }) {
               </p>
             </div>
           </div>
+          <BookingSlot stationId={stationId} />
         </div>
       )}
     </div>
